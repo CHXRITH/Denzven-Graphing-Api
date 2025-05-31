@@ -1,6 +1,6 @@
 # Denzven-Graphing-Api  
 
-to read the docs with fancy css head over to -> https://www.denzven.tk/Denzven-Graphing-Api/  
+to read the docs with fancy css head over to -> https://denzven.github.io/Denzven-Graphing-Api/  
 
 ### Welcome! this is [Denzven-Graphing-Api](https://denzven.pythonanywhere.com/)
 
