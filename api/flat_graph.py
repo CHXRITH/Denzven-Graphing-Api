@@ -39,6 +39,7 @@ def flat_graph():
     axfacecolor = flask.request.args.get("axfacecolor")
     figfacecolor = flask.request.args.get("figfacecolor")
     title_text = flask.request.args.get("title_text")
+    numbers = flask.request.args.get("numbers")
     plot_style_list = [ "Solarize_Light2", "_classic_test_patch", "bmh", 
                         "classic", "dark_background", "fast", "fivethirtyeight", 
                         "ggplot", "grayscale", "seaborn", "seaborn-bright", 
@@ -68,6 +69,7 @@ def flat_graph():
       tick_colors : {tick_colors}
       axfacecolor : {axfacecolor}
      figfacecolor : {figfacecolor}
+          numbers : {numbers}
     ```
     """
     asyncio.run(config.SendLogs(OutputMessage))
@@ -301,12 +303,15 @@ def flat_graph():
         # ---
 
         try:  # setting up tick_colors
-            if tick_colors is None:
-                ax.tick_params(colors=config.DEFAULT_TICKS_COLOR, which="both")
-                pass
+            final_tick_color = config.DEFAULT_TICKS_COLOR
+            if numbers is not None:
+                final_tick_color = "black"
+
             if tick_colors is not None:
-                ax.tick_params(colors=f"#{tick_colors}", which="both")
-                pass
+                final_tick_color = f"#{tick_colors}"
+            
+            ax.tick_params(colors=final_tick_color, which="both")
+
         except Exception as e:
             return flask.jsonify(
                 error=str(e),
